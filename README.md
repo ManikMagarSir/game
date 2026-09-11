@@ -32,6 +32,21 @@ npx playwright test   # e2e: lobby → intro → HUD → shop → render loop
 npm run build   # tsc + vite + PWA precache
 ```
 
+## CORS
+
+Single point of control: `.env` (personal overrides in `.env.local`,
+git-ignored). `vite.config.ts` reads it and applies the headers to the dev
+server + preview, plus an optional `/api` dev proxy. The app itself makes
+zero cross-origin requests (Three.js is bundled, no CDN, no backend yet),
+so by default this only hardens local serving.
+
+| Var | Default |
+|---|---|
+| `CORS_ALLOW_ORIGIN` | `http://127.0.0.1:5173` |
+| `CORS_ALLOW_METHODS` | `GET,POST,PUT,PATCH,DELETE,OPTIONS` |
+| `CORS_ALLOW_HEADERS` | `Content-Type,Authorization` |
+| `API_PROXY_TARGET` | _(empty = disabled)_ |
+
 ## Controls
 
 | Input | Action |
